@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'glolab.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'djangogirls',
+        'NAME': 'glolab',
         'USER': 'name',
         'PASSWORD': '',
         'HOST': 'localhost',
