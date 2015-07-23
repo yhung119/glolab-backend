@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url,patterns
 from django.contrib import admin
 from django.views.generic import TemplateView
+import views
 
 
 urlpatterns = patterns('',
@@ -24,6 +25,6 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', TemplateView.as_view(template_name='x.html')),
+    url(r'^$', views.index, name='index'),
     (r'^accounts/',include('registration.backends.simple.urls')),
 )
