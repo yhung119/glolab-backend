@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content%}
+
+{% if user.is_authenticated %}
+<h1>Edit profile</h1>
+<form id="profile" method="post" action=".">
+{% csrf_token %}
+
+{{form.as_p}}
+
+<button type='submit'>Edit</button>
+</form>
+{%endif%}
+
+{%endblock%}
