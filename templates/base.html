@@ -57,13 +57,16 @@
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#about">Companies</a>
+                        <a href="/#page-top">Companies</a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="page-scroll">
                         <a href="/accounts/logout">Logout</a>
                     </li>
                     {% else %}
+                    <li class="page-scroll">
+                        <a href="/accounts/register">Register</a>
+                    </li>
                     <li class="page-scroll">
                         <a href="/accounts/login">Login</a>
                     </li>
@@ -77,10 +80,11 @@
         <!-- /.container-fluid -->
     </nav>
     
-    
+<section>
  {% block content %}
    
 {% endblock %}
+</section>
 <footer class="text-center">
         <div class="footer-above">
             <div class="container">

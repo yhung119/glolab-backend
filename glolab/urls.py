@@ -17,6 +17,7 @@ from django.conf.urls import include, url,patterns
 from django.contrib import admin
 from django.views.generic import TemplateView
 
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'project.views.home', name='home'),
