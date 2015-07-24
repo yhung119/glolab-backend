@@ -106,14 +106,34 @@
     {% if user.is_authenticated %}
     {% else %}
     <section id= "loginpage" class="success1">
+
+    <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+    <h2 class="form-signin-heading">Student sign in</h2>
+                </div>
+            </div>
+        </div>
+
+    <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+
     <form id= "form2" class="form-signin" role="form" method="post" action="/accounts/login/">
     {% csrf_token %}
-
-    <h2 class="form-signin-heading">Please sign in</h2>
-    <br> 
-    <input class="form-control" placeholder="Username" id="id_username" maxlength="254" name="username" type="text" required autofocus=""/>
     <br>
-    <input type="password" class="form-control" placeholder="Password" id="id_password" name="password" type="password" required />
+    <div class="row control-group">
+         <div class="form-group col-xs-12 floating-label-form-group controls">
+    <input class="form-control"placeholder="Username" id="id_username" maxlength="254" name="username" type="text" required autofocus=""/>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+    <input class="form-control"type="password" placeholder="Password" id="id_password" name="password" type="password" required />
+            </div>
+    </div>
     <br>
 
     <div class="row">
@@ -123,10 +143,14 @@
 
         </form>
 
+            </div>
+        </div>
+
     </div>
     </section>
 
     {% endif %}
+<!--End of Sign In -->
 
 
     <section class="success2">
