@@ -24,6 +24,7 @@ def register(request):
 			profile.save()
 
 			registered = True
+			
 		else:
 			print user_form.errors, profile_form.errors
 	else:
