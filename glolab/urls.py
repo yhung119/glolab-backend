@@ -26,6 +26,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.index, name='index'),
-    url(r'^register/$',views.register, name='register'),
+    url(r'^student/register/$',views.register, name='register'),
+    url(r'^company/register/$',views.companyregister,name='companyregister'),
     (r'^accounts/',include('registration.backends.simple.urls')),
 )

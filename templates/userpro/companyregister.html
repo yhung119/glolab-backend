@@ -27,7 +27,7 @@
 <hr/>
 <div class="row container">
 <div class="col-lg-8 col-lg-offset-2">
-<form id="user_form" method = "post" action="/student/register/" enctype="multipart/form-data">
+<form id="user_form" method = "post" action="/company/register/" enctype="multipart/form-data">
 {% csrf_token %}
 <div class="row control-group">
 	<div class="form-group col-xs-12 floating-label-form-group controls"> 
@@ -48,21 +48,23 @@
 
 <div class="row control-group">
 	<div class="form-group col-xs-12 floating-label-form-group controls">
-	<label for="id_student_first_name">First name:</label><input class="form-control" id="id_student_first_name" maxlength="128" name="student_first_name" type="text" placeholder="Enter First Name"  /><br />
+	<label for="id_company_name">Company Name:</label><input class="form-control" id="id_company_name" maxlength="128" name="company_name" type="text" required="true" placeholder="Enter Company Name"  /><br />
 	</div>
 </div>
 
 <div class="row control-group">
-	<div class="form-group col-xs-12 floating-label-form-group controls"><label for="id_student_last_name">Last name:</label><input class="form-control" id="id_student_last_name" maxlength="128" name="student_last_name" type="text" placeholder="Enter Last Name"  /><br />
+    <div class="form-group col-xs-12 floating-label-form-group controls">
+	<textarea class="form-control" cols="40" id="id_description" name="description" placeholder="Description:"rows="10">
+	</textarea>
 	</div>
 </div>
-	
+
 <div class="row control-group">
     <div class="form-group col-xs-12 floating-label-form-group controls">
-	<textarea class="form-control" cols="40" id="id_about_me" name="about_me" placeholder="about me" required="false" rows="10">
-</textarea>
-	</div>
+    <label for="id_website">Website:</label><input class="form-control" id="id_website" maxlength="200" name="website" type="url" />
+   	</div>
 </div>
+
 <br>
 
 <div class="row">

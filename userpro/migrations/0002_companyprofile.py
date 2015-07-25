@@ -9,16 +9,16 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('userpro', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='UserProfile',
+            name='CompanyProfile',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('student_first_name', models.CharField(max_length=128)),
-                ('student_last_name', models.CharField(max_length=128)),
-                ('about_me', models.TextField(default=b'', max_length=100, blank=True)),
+                ('company_name', models.CharField(max_length=128)),
+                ('description', models.TextField(default=b'', max_length=100, blank=True)),
                 ('website', models.URLField(blank=True)),
                 ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],

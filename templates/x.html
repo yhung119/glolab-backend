@@ -137,7 +137,7 @@
     <br>
 
     <div class="row">
-  <div class="col-md-6"><a class="btn btn-lg btn-primary btn-block" href="/register/"  />Register</a></div>
+  <div class="col-md-6"><a class="btn btn-lg btn-primary btn-block" href="student/register/"  />Register</a></div>
   <div class="col-md-6"><button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit"  />Sign in</button></div>
 </div>
 
@@ -173,7 +173,11 @@
                     </a>
         </div>
         </div>
-
+        {%if user.is_authenticated %}
+        {%else%}
+        <div class="row">
+  <div class="col-md-6"><a class="btn btn-lg btn-primary btn-block" href="company/register/"  />Register</a></div>
+        {%endif%}
     </section>
 
     <!-- Contact Section -->
