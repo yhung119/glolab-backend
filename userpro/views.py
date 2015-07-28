@@ -25,6 +25,7 @@ def register(request):
 			profile.save()
 
 			registered = True
+			return HttpResponseRedirect('/')
 
 		else:
 			print user_form.errors, profile_form.errors
@@ -74,7 +75,7 @@ def editprofile(request):
 			profile = profile_form.save(commit = False)
 			profile.user = request.user
 			profile.save()
-
+			edit = True
 			return HttpResponseRedirect('/')
 
 		else:
@@ -94,12 +95,7 @@ def index(request):
 	# We make use of the shortcut function to make our lives easier.
 	# Note that the first parameter is the template we wish to use.
 	return render(request, 'x.html', context_dict)
-def company(request):
-	context_dict = {'boldmessage': "I am bold font from the context"}
 
-	# Return a rendered response to send to the client.
-	# We make use of the shortcut function to make our lives easier.
-	# Note that the first parameter is the template we wish to use.
-	return render(request, 'company.html', context_dict)
+
 
 
