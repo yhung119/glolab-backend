@@ -37,6 +37,7 @@ def register(request):
 	return render(request,
 		'userpro/register.html',
 		{'user_form': user_form, 'profile_form': profile_form, 'registered':registered})
+
 def companyregister(request):
 	registered =False
 	if request.method == 'POST':
@@ -86,6 +87,20 @@ def editprofile(request):
 	return render(request,
 		'userpro/useredit.html',
 		{'profile_form':profile_form})
+
+
+@login_required
+def editstudentprofile(request):
+	if request.method == 'POST':
+		form = editStudentProfile(request.POST, instance = request.user)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect("/")
+	else:
+		form = UserProfileForm()
+	
+	return render(request, 'registration/student_profile_edit.html', {'form':form})
+
 def index(request):
 	
 	# Construct a dictionary to pass to the template engine as its context.
@@ -96,7 +111,12 @@ def index(request):
 	# We make use of the shortcut function to make our lives easier.
 	# Note that the first parameter is the template we wish to use.
 	return render(request, 'x.html', context_dict)
+<<<<<<< HEAD
 
+def company(request):
+	context_dict = {'boldmessage': "I am bold font from the context"}
+=======
+>>>>>>> origin/master
 
 
 
