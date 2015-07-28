@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from userpro.models import UserProfile, CompanyProfile
 from userpro.forms import UserProfileForm, UserForm,CompanyProfileForm
 from django.http import HttpResponseRedirect
+from django.contrib.auth.models import Group
 # Create your views here.
 
 

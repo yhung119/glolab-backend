@@ -112,6 +112,13 @@
     <!-- Signin Section -->
 
     {% if user.is_authenticated %}
+    <section>
+      <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <a href="/accounts/password/change/" class="btn btn-lg btn-primary btn-block">
+                        Change Password
+                    </a>
+        </div>
+    </section>
     {% else %}
     <section id= "loginpage" class="success1">
 
