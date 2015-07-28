@@ -30,6 +30,6 @@ urlpatterns = patterns('',
     url(r'^student/editprofile/$', views.editstudentprofile, name='editstudentprofile'),
     url(r'^student/edit/$',views.editprofile,name='edit'),
     url(r'^company/register/$',views.companyregister,name='companyregister'),
-    url(r'^company/$',views.company,name='company'),
     (r'^accounts/',include('registration.backends.simple.urls')),
+    
 )
