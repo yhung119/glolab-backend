@@ -1,52 +1,8 @@
- {% extends 'base.html' %}
+{% extends 'base.html' %}
  {% block content %}
 
 
    <!-- Header Carousel -->
-    <header id="myCarousel" class="carousel slide">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            <div class="item active">
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
-                <div class="carousel-caption">
-                    <h2 style="font-size:30px;">Caption 1</h2>
-                </div>
-            </div>
-            <div class="item">
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
-                <div class="carousel-caption">
-                    <h2 style="font-size:30px;">Caption 2</h2>
-                </div>
-            </div>
-            <div class="item">
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
-                <div class="carousel-caption">
-                    <h2 style="font-size:30px;">Caption 3</h2>
-                </div>
-            </div>
-        </div>
-
-        <!-- Controls -->
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-            <span class="icon-prev"></span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-            <span class="icon-next"></span>
-        </a>
-    </header>
-
-
-    <!-- Header -->
-
-    </section>
-
  <section  id="about">
         <div class="container">
             <div class="row">
@@ -82,12 +38,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                
-                
                     <h2>For students</h2>
-               
                     <hr class="star-light">
-                
                 </div>
             </div>
            
@@ -106,54 +58,18 @@
     </section>
 
     <!-- Signin Section -->
-
-    {% if user.is_authenticated %}
-    {% else %}
-    <section id= "loginpage" class="success1">
-
+<section>
     <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-    <h2 class="form-signin-heading">Student sign in</h2>
-                </div>
-            </div>
-        </div>
+   {%if user.is_authenticated %}
+        {%else%}
+        <div class="row">
+  <div class="col-md-12"><a class="btn btn-lg btn-primary btn-block" href="register/"  />Register</a></div>
 
-    <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-
-    <form id= "form2" class="form-signin" role="form" method="post" action="/accounts/login/">
-    {% csrf_token %}
-    <br>
-    <div class="row control-group">
-         <div class="form-group col-xs-12 floating-label-form-group controls">
-    <input class="form-control"placeholder="Username" id="id_username" maxlength="254" name="username" type="text" required autofocus=""/>
-        </div>
-    </div>
-
-    <br>
-
-    <div class="row control-group">
-            <div class="form-group col-xs-12 floating-label-form-group controls">
-    <input class="form-control"type="password" placeholder="Password" id="id_password" name="password" type="password" required />
-            </div>
-    </div>
-    <br>
-
-    <div class="row">
-  <div class="col-md-6"><a class="btn btn-lg btn-primary btn-block" href="student/register/"  />Register</a></div>
-  <div class="col-md-6"><button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit"  />Sign in</button></div>
+  </div>
+  {%endif%}
 </div>
+</section>
 
-        </form>
-
-            </div>
-        </div>
-
-    </div>
-    </section>
-
-    {% endif %}
 <!--End of Sign In -->
 
 
@@ -177,7 +93,8 @@
                     </a>
         </div>
         </div>
-
+        
+    
     </section>
 
     <!-- Contact Section -->

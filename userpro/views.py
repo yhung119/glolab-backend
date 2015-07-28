@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from userpro.models import UserProfile, CompanyProfile
 from userpro.forms import UserProfileForm, UserForm,CompanyProfileForm
+from django.http import HttpResponseRedirect
 # Create your views here.
 
 
@@ -63,8 +64,28 @@ def companyregister(request):
 		'userpro/companyregister.html',
 		{'user_form': user_form, 'profile_form': profile_form, 'registered':registered})
 
-def index(request):
+@login_required
+def editprofile(request):
+	edit = False
+	if request.method == 'POST':
+		profile_form = UserProfileForm(data=request.POST)
 
+		if profile_form.is_valid():
+			profile = profile_form.save(commit = False)
+			profile.user = request.user
+			profile.save()
+
+			return HttpResponseRedirect('/')
+
+		else:
+			print profile_form.errors
+	else:
+		profile_form=UserProfileForm()
+	return render(request,
+		'userpro/useredit.html',
+		{'profile_form':profile_form})
+def index(request):
+	
 	# Construct a dictionary to pass to the template engine as its context.
 	# Note the key boldmessage is the same as {{ boldmessage }} in the template!
 	context_dict = {'boldmessage': "I am bold font from the context"}
@@ -73,3 +94,12 @@ def index(request):
 	# We make use of the shortcut function to make our lives easier.
 	# Note that the first parameter is the template we wish to use.
 	return render(request, 'x.html', context_dict)
+def company(request):
+	context_dict = {'boldmessage': "I am bold font from the context"}
+
+	# Return a rendered response to send to the client.
+	# We make use of the shortcut function to make our lives easier.
+	# Note that the first parameter is the template we wish to use.
+	return render(request, 'company.html', context_dict)
+
+

@@ -13,11 +13,22 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='CompanyProfile',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('company_name', models.CharField(max_length=128)),
+                ('description', models.TextField(default=b'', max_length=100, blank=True)),
+                ('website', models.URLField(blank=True)),
+                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
             name='UserProfile',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('student_first_name', models.CharField(max_length=128)),
-                ('student_last_name', models.CharField(max_length=128)),
                 ('about_me', models.TextField(default=b'', max_length=100, blank=True)),
                 ('website', models.URLField(blank=True)),
                 ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
