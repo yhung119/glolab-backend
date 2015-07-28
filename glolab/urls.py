@@ -18,7 +18,6 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from userpro import views
 
-
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'project.views.home', name='home'),

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from userpro.models import UserProfile, CompanyProfile
-from userpro.forms import UserProfileForm, UserForm,CompanyProfileForm
+from userpro.forms import UserProfileForm, UserForm,CompanyProfileForm,editStudentProfile
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import Group
 # Create your views here.
@@ -111,12 +111,8 @@ def index(request):
 	# We make use of the shortcut function to make our lives easier.
 	# Note that the first parameter is the template we wish to use.
 	return render(request, 'x.html', context_dict)
-<<<<<<< HEAD
 
 def company(request):
 	context_dict = {'boldmessage': "I am bold font from the context"}
-=======
->>>>>>> origin/master
-
 
 

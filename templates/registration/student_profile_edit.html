@@ -3,11 +3,10 @@
 
 {% block content%}
 
-{% csrf_token %}
 <div class ="container" style="padding-top:70px">
 	<div class="row">
 		<div class="col-lg-12 text-center">
-			<h2 class="form-signin-heading">Sign Up Here</h2>
+			<h2 class="form-signin-heading">Update Profile</h2>
 		</div>
 	</div>
 </div>
@@ -15,6 +14,7 @@
 <div class="col-lg-8 col-lg-offset-2">
 <form role="form"  method="post" action=".">
 
+{% csrf_token %}
 
 <div class="row control-group">
 	<div class="form-group col-xs-12 floating-label-form-group controls">
@@ -31,17 +31,15 @@
 
 <div class="row control-group">
 	<div class="form-group col-xs-12 floating-label-form-group controls">
-			<p class="required"> <label for="id_username">First Name</label>
-			<input class="form-control"  id="id_username" maxlength="30" name="firstname" type="text"  placeholder="Enter First Name"/></p>
+			<p class="required"> <label for="id_first_name">First Name</label>
+			<input class="form-control"  id="id_first_name" maxlength="30" name="firstname" type="text"  placeholder="Enter First Name"/></p>
 	</div>
 </div>
 
-
-
 <div class="row control-group">
 	<div class="form-group col-xs-12 floating-label-form-group controls">
-			<p class="required"> <label for="id_username">Last Name:</label>
-			<input class="form-control"  id="id_username" maxlength="30" name="lastname" type="text"  placeholder="Enter last name"/></p>
+			<p class="required"> <label for="id_last_name">Last Name:</label>
+			<input class="form-control"  id="id_last_name" maxlength="30" name="lastname" type="text"  placeholder="Enter last name"/></p>
 	</div>
 </div>
 
