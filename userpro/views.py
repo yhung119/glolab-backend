@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from userpro.models import UserProfile, CompanyProfile
-from userpro.forms import UserProfileForm, UserForm,CompanyProfileForm,editStudentProfile
+from userpro.forms import UserProfileForm, UserForm,CompanyProfileForm,editStudentProfile,editStudentDetailProfile
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import Group
 # Create your views here.
@@ -92,9 +92,13 @@ def editprofile(request):
 def editstudentprofile(request):
 	if request.method == 'POST':
 		form = editStudentProfile(request.POST, instance = request.user)
-		if form.is_valid():
+		detail = editStudentDetailProfile(request.POST, instance = request.user)
+		if form.is_valid() and detail.is_valid():
+			detail.save()
 			form.save()
 			return HttpResponseRedirect("/")
+		else:
+			print form.errors() and detail.errors()
 	else:
 		form = UserProfileForm()
 	
