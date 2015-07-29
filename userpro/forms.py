@@ -6,33 +6,15 @@ class UserForm(forms.ModelForm):
 	password = forms.CharField(widget = forms.PasswordInput())
 	class Meta:
 		model = User
-		fields = ('username', 'email','first_name','last_name', 'password')
+		fields = ('username', 'email','password','first_name','last_name', )
 
 class UserProfileForm(forms.ModelForm):
-	username = forms.CharField(required = True)
-	email = forms.EmailField(required = True)
-	first_name = forms.CharField(required = False)
-	last_name = forms.CharField(required = False)
+	about_me = forms.CharField(required=True)
 
 	class Meta:
-		model = User
-		fields = ('username', 'email', 'first_name', 'last_name')
+		model = UserProfile
+		fields=('about_me',)
 
-	def clean_email(self):
-		username = self.cleaned_data.get('username')
-		email = self.cleaned_data.get('email')
-
-		if email and User.objects.filter(email=email).exclude(username=username).count():
-			raise forms.ValidationError('This email address is already in use. Please supply a different email address.')
-		return email
-
-	def save(self, commit=True):
-		user=super(RegistrationForm, self).save(commit=False)
-		user.email = self.cleaned_data['email']
-
-		if commit:
-			user.save()
-		return user
 
 class editStudentProfile(forms.ModelForm):
 	username = forms.CharField(required=True)
@@ -42,7 +24,7 @@ class editStudentProfile(forms.ModelForm):
 
    	class Meta:
    	    model = User
-   	    fields = ('username', 'email', 'first_name', 'last_name')
+   	    fields = ('username', 'email', 'first_name', 'last_name',)
 
    	def clean_email(self):
    		username = self.cleaned_data.get('username')
@@ -59,6 +41,20 @@ class editStudentProfile(forms.ModelForm):
 	        user.save()
 
 	    return user
+
+class editStudentDetailProfile(forms.ModelForm):
+   	about_me = forms.CharField(required=False)
+
+   	class Meta:
+   		model = UserProfile
+   		fields = ('about_me',)
+
+   	def save(self, commit=True):
+   		user = super(editStudentDetailProfile, self).save(commit=False)
+   		if commit:
+   			user.save()
+   		return user
+
 
 class CompanyProfileForm(forms.ModelForm):
 	company_name = forms.CharField(max_length=128, required=True)

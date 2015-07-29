@@ -9,7 +9,6 @@ from django.contrib.auth.models import Group
 
 def register(request):
 	registered = False
-
 	if request.method == 'POST':
 		user_form = UserForm(data=request.POST)
 		profile_form = UserProfileForm(data=request.POST)
