@@ -29,8 +29,7 @@ class Migration(migrations.Migration):
             name='UserProfile',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('about_me', models.TextField(default=b'', max_length=100, blank=True)),
-                ('website', models.URLField(blank=True)),
+                ('about_me', models.TextField(default=b'', max_length=450, blank=True)),
                 ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
             options={

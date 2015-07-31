@@ -9,13 +9,15 @@ from django.contrib.auth.models import Group
 
 def register(request):
 	registered = False
+	if request.user.is_authenticated():
+		return HttpResponseRedirect('/')
 	if request.method == 'POST':
 		user_form = UserForm(data=request.POST)
 		profile_form = UserProfileForm(data=request.POST)
 
 		if user_form.is_valid() and profile_form.is_valid():
 
-			user = user_form.save()
+			user = user_form.save(commit=False)
 			user.set_password(user.password)
 			user.save()
 
@@ -69,12 +71,19 @@ def companyregister(request):
 @login_required
 def editprofile(request):
 	edit = False
+	try:
+		user_obj = User.Objects.get(user=request.user)
+	except:
+		user_obj = None
+	profile_form = UserProfileForm(instance = user_obj)
 	if request.method == 'POST':
-		profile_form = UserProfileForm(data=request.POST)
-
+		profile_form = UserProfileForm(data=request.POST, instance = user_obj)
+		user = request.user
 		if profile_form.is_valid():
-			profile = profile_form.save(commit = False)
-			profile.user = request.user
+
+			profile = profile_form.save(commit=False)
+			profile.user=request.user
+			deletextra(user.id)
 			profile.save()
 			edit = True
 			return HttpResponseRedirect('/')
@@ -92,17 +101,20 @@ def editprofile(request):
 def editstudentprofile(request):
 	if request.method == 'POST':
 		form = editStudentProfile(request.POST, instance = request.user)
-		detail = editStudentDetailProfile(request.POST, instance = request.user)
-		if form.is_valid() and detail.is_valid():
-			detail.save()
+		profile_form = UserProfileForm(data=request.POST, instance = request.user)
+		if form.is_valid() and profile_form.is_valid():
 			form.save()
+			profile = profile_form.save(commit=False)
+			
+			profile.save()
 			return HttpResponseRedirect("/")
 		else:
-			print form.errors() and detail.errors()
+			print form.errors() and profile_form.errors()
 	else:
-		form = UserProfileForm()
+		form = editStudentProfile()
+		detail = UserProfileForm()
 	
-	return render(request, 'registration/student_profile_edit.html', {'form':form})
+	return render(request, 'registration/student_profile_edit.html', {'form':form, 'detail': detail})
 
 def index(request):
 	
@@ -117,5 +129,16 @@ def index(request):
 
 def company(request):
 	context_dict = {'boldmessage': "I am bold font from the context"}
+
+def deletextra(x):
+	count = UserProfile.objects.filter(user_id=x)
+	if count > 0:
+		count.delete()
+	
+
+
+
+
+
 
 
