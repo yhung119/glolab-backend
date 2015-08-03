@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class UserProfile(models.Model):
-	user = models.OneToOneField(User)
+	user = models.OneToOneField(User,null=True)
 	about_me = models.TextField(max_length=450, default='', blank=True)
 	
 	def __unicode__(self):
