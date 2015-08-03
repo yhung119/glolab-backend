@@ -17,11 +17,20 @@ def register(request):
 		profile_form = UserProfileForm(request.POST)
 
 		if user_form.is_valid() and profile_form.is_valid():
+<<<<<<< HEAD
 
 			user = user_form.save()
+=======
+			
+			
+			user = user_form.save(commit=False)
+			
+>>>>>>> origin/master
 			user.set_password(user.password)
 			user.save()
-
+			g=Group.objects.get(name="student")
+			g.user_set.add(user)
+			
 			profile = profile_form.save(commit=False)
 			profile.user = user
 
@@ -73,7 +82,8 @@ def companyregister(request):
 			user = user_form.save()
 			user.set_password(user.password)
 			user.save()
-
+			g=Group.objects.get(name="company")
+			g.user_set.add(user)
 			profile = profile_form.save(commit=False)
 			profile.user = user
 
@@ -91,7 +101,7 @@ def companyregister(request):
 		'userpro/companyregister.html',
 		{'user_form': user_form, 'profile_form': profile_form, 'registered':registered})
 
-	
+
 def is_student(user):
 	return user.groups.filter(name='student').exists()
 
@@ -102,15 +112,14 @@ def editprofile(request):
 		user_obj = User.Objects.get(user=request.user)
 	except:
 		user_obj = None
-	profile_form = UserProfileForm(instance = user_obj)
 	if request.method == 'POST':
-		profile_form = UserProfileForm(data=request.POST, instance = user_obj)
+		profile_form = UserProfileForm(data=request.POST, instance = request.user.userprofile)
 		user = request.user
 		if profile_form.is_valid():
 
 			profile = profile_form.save(commit=False)
 			profile.user=request.user
-			deletextra(user.id)
+			
 			profile.save()
 			edit = True
 			return HttpResponseRedirect('/')
@@ -123,24 +132,70 @@ def editprofile(request):
 		'userpro/useredit.html',
 		{'profile_form':profile_form})
 
+<<<<<<< HEAD
+=======
+def is_company(user):
+	return user.groups.filter(name='company').exists()
+@user_passes_test(is_company,login_url='/')
+def editcompanyprofile(request):
+	try:
+		company_obj=User.objects.get(user=request.user)
+	except:
+		company_obj=None
+	if request.method=="POST":
+		profile_form = CompanyProfileForm(data=request.POST, instance = request.user.companyprofile)
+		user = request.user
+		if profile_form.is_valid():
+
+			profile = profile_form.save(commit=False)
+			profile.user=request.user
+			
+			profile.save()
+			edit = True
+			return HttpResponseRedirect('/')
+
+		else:
+			print profile_form.errors
+	else:
+		profile_form=CompanyProfileForm()
+	return render(request,
+		'userpro/companyedit.html',
+		{'profile_form':profile_form})
+@login_required()
+def editstudentprofile(request):
+	if request.method == 'POST':
+		form = editStudentProfile(request.POST, instance = request.user)
+		profile_form = UserProfileForm(data=request.POST, instance = request.user)
+		if form.is_valid() and profile_form.is_valid():
+			form.save()
+			profile = profile_form.save(commit=False)
+			
+			profile.save()
+			return HttpResponseRedirect("/")
+		else:
+			print form.errors() and profile_form.errors()
+	else:
+		form = editStudentProfile()
+		detail = UserProfileForm()
+	
+	return render(request, 'registration/student_profile_edit.html', {'form':form, 'detail': detail})
+
+>>>>>>> origin/master
 def index(request):
 	
 	# Construct a dictionary to pass to the template engine as its context.
 	# Note the key boldmessage is the same as {{ boldmessage }} in the template!
-	context_dict = {'boldmessage': "I am bold font from the context"}
+	
 
 	# Return a rendered response to send to the client.
 	# We make use of the shortcut function to make our lives easier.
 	# Note that the first parameter is the template we wish to use.
-	return render(request, 'x.html', context_dict)
+	return render(request, 'student.html', {})
 
-def company(request):
-	context_dict = {'boldmessage': "I am bold font from the context"}
 
-def deletextra(x):
-	count = UserProfile.objects.filter(user_id=x)
-	if count > 0:
-		count.delete()
+@login_required
+def profile(request):
+	return render(request,'userpro/profile.html',{})
 
 
 	

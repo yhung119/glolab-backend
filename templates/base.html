@@ -56,19 +56,28 @@
                     <li class="hidden">
                         <a href="/#page-top"></a>
                     </li>
-                    <li class="page-scroll">
-                        <a href="/#company">Companies</a>
-                    </li>
+
+                    
                     {% if user.is_authenticated %}
-
-                    <li class="page-scroll">
-                        <a href="student/editprofile/">Edit Profile</a>
+                     <li class="page-scroll">
+                        <a href="/profile">View Profile</a>
                     </li>
-
+                    {% if user.userprofile %}
+                    <li class="page-scroll">
+                        <a href="/student/edit/">Edit Profile</a>
+                    </li>
+                    {%elif user.companyprofile%}
+                    <li class="page-scroll">
+                        <a href="/company/edit/">Edit Company Profile</a>
+                    </li>
+                    {%endif%}
                     <li class="page-scroll">
                         <a href="/accounts/logout">Logout</a>
                     </li>
                     {% else %}
+                    <li class="page-scroll">
+                        <a href="/#company">Companies</a>
+                    </li>
                     <li class="page-scroll">
                         <a href="/#student">Student</a>
                     </li>

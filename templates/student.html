@@ -45,7 +45,6 @@
 
     <!-- Header -->
 
-    </section>
 
 
 
@@ -56,6 +55,7 @@
                 
                     <h2>About {%if user.is_authenticated %}
                         {{user.username}}
+                        {{user.userprofile.about_me}}
                         {%endif%}</h2>
               
 

@@ -1,0 +1,23 @@
+{%extends "base.html"%}
+{%block content%}
+<div class="container">
+            <div class="row">
+{%if user.userprofile %}
+<br>
+Firs Name:{{user.first_name}}
+<br>
+Last Name: {{user.last_name}}
+<br>
+About Me:{{user.userprofile.about_me}}
+
+{%elif user.companyprofile %}
+<br>
+Company Name:{{user.companyprofile.company_name}}
+<br>
+Description :{{user.companyprofile.description}}
+<br>
+Website:  <a href="{{user.companyprofile.website}} ">{{user.companyprofile.website}} </a>
+{%endif%}
+</div>
+</div>
+{%endblock%}
