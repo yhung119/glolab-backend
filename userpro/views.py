@@ -4,6 +4,7 @@ from userpro.models import UserProfile, CompanyProfile
 from userpro.forms import UserProfileForm, UserForm,CompanyProfileForm,editStudentProfile,editStudentDetailProfile
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import Group
+from django.contrib.auth.decorators import permission_required, user_passes_test
 # Create your views here.
 
 
@@ -68,7 +69,10 @@ def companyregister(request):
 		'userpro/companyregister.html',
 		{'user_form': user_form, 'profile_form': profile_form, 'registered':registered})
 
-@login_required
+	
+def is_student(user):
+	return user.groups.filter(name='student').exists()
+@user_passes_test(is_student, login_url='/')
 def editprofile(request):
 	edit = False
 	try:
@@ -96,8 +100,7 @@ def editprofile(request):
 		'userpro/useredit.html',
 		{'profile_form':profile_form})
 
-
-@login_required
+@login_required()
 def editstudentprofile(request):
 	if request.method == 'POST':
 		form = editStudentProfile(request.POST, instance = request.user)
@@ -134,6 +137,8 @@ def deletextra(x):
 	count = UserProfile.objects.filter(user_id=x)
 	if count > 0:
 		count.delete()
+
+
 	
 
 
