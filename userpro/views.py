@@ -13,12 +13,12 @@ def register(request):
 	if request.user.is_authenticated():
 		return HttpResponseRedirect('/')
 	if request.method == 'POST':
-		user_form = UserForm(data=request.POST)
-		profile_form = UserProfileForm(data=request.POST)
+		user_form = UserForm(request.POST)
+		profile_form = UserProfileForm(request.POST)
 
 		if user_form.is_valid() and profile_form.is_valid():
 
-			user = user_form.save(commit=False)
+			user = user_form.save()
 			user.set_password(user.password)
 			user.save()
 
@@ -39,6 +39,28 @@ def register(request):
 	return render(request,
 		'userpro/register.html',
 		{'user_form': user_form, 'profile_form': profile_form, 'registered':registered})
+
+
+@login_required()
+def editstudentprofile(request):
+	if request.method == 'POST':
+		form = editStudentProfile(request.POST, instance = request.user)
+		detail = UserProfileForm(data=request.POST, instance = request.user)
+		if form.is_valid() and detail.is_valid():
+			user = form.save()
+			user.save()
+			profile = detail.save(commit=False)
+			profile.user=user
+			profile.save()
+			return HttpResponseRedirect("/")
+		else:
+			print form.errors() and profile_form.errors()
+	else:
+		form = editStudentProfile()
+		detail = UserProfileForm()
+	
+	return render(request, 'registration/student_profile_edit.html', {'form':form,'' 'detail': detail})
+
 
 def companyregister(request):
 	registered =False
@@ -72,6 +94,7 @@ def companyregister(request):
 	
 def is_student(user):
 	return user.groups.filter(name='student').exists()
+
 @user_passes_test(is_student, login_url='/')
 def editprofile(request):
 	edit = False
@@ -99,25 +122,6 @@ def editprofile(request):
 	return render(request,
 		'userpro/useredit.html',
 		{'profile_form':profile_form})
-
-@login_required()
-def editstudentprofile(request):
-	if request.method == 'POST':
-		form = editStudentProfile(request.POST, instance = request.user)
-		profile_form = UserProfileForm(data=request.POST, instance = request.user)
-		if form.is_valid() and profile_form.is_valid():
-			form.save()
-			profile = profile_form.save(commit=False)
-			
-			profile.save()
-			return HttpResponseRedirect("/")
-		else:
-			print form.errors() and profile_form.errors()
-	else:
-		form = editStudentProfile()
-		detail = UserProfileForm()
-	
-	return render(request, 'registration/student_profile_edit.html', {'form':form, 'detail': detail})
 
 def index(request):
 	

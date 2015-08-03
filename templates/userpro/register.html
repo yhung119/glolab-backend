@@ -29,6 +29,8 @@
 <div class="col-lg-8 col-lg-offset-2">
 <form id="user_form" method = "post" action="/student/register/" enctype="multipart/form-data">
 {% csrf_token %}
+
+<!--
 <div class="row control-group">
 	<div class="form-group col-xs-12 floating-label-form-group controls"> 
 	<label for="id_username">Username:</label><input class="form-control" id="id_username" maxlength="30" name="username" type="text" placeholder="Enter Username" /><br />
@@ -63,6 +65,11 @@
 </div>
 
 </div>
+-->
+
+
+     {{ user_form.as_p }}
+            {{ profile_form.as_p }}
 <br>
 <br />
 <div class="row">
