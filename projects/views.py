@@ -82,3 +82,29 @@ def category(request, category_name_slug):
 
     # Go render the response and return it to the client.
     return render(request, 'projects/category.html', context_dict)
+
+def project(request, category_name_slug,project_name_slug):
+
+    # Create a context dictionary which we can pass to the template rendering engine.
+    context_dict = {}
+
+    try:
+        # Can we find a category name slug with the given name?
+        # If we can't, the .get() method raises a DoesNotExist exception.
+        # So the .get() method returns one model instance or raises an exception.
+        project = Project.objects.get(slug=project_name_slug)
+        context_dict['project_name'] = project.name
+
+        # We also add the category object from the database to the context dictionary.
+        # We'll use this in the template to verify that the category exists.
+        context_dict['project'] = project
+        context_dict['slug']=project_name_slug
+
+    except Project.DoesNotExist:
+        # We get here if we didn't find the specified category.
+        # Don't do anything - the template displays the "no category" message for us.
+        pass
+
+    # Go render the response and return it to the client.
+    return render(request, 'projects/individual_project_view.html', context_dict)
+
