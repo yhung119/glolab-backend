@@ -17,15 +17,12 @@ def register(request):
 		profile_form = UserProfileForm(request.POST)
 
 		if user_form.is_valid() and profile_form.is_valid():
-<<<<<<< HEAD
 
 			user = user_form.save()
-=======
 			
 			
 			user = user_form.save(commit=False)
 			
->>>>>>> origin/master
 			user.set_password(user.password)
 			user.save()
 			g=Group.objects.get(name="student")
@@ -132,8 +129,6 @@ def editprofile(request):
 		'userpro/useredit.html',
 		{'profile_form':profile_form})
 
-<<<<<<< HEAD
-=======
 def is_company(user):
 	return user.groups.filter(name='company').exists()
 @user_passes_test(is_company,login_url='/')
@@ -180,7 +175,7 @@ def editstudentprofile(request):
 	
 	return render(request, 'registration/student_profile_edit.html', {'form':form, 'detail': detail})
 
->>>>>>> origin/master
+
 def index(request):
 	
 	# Construct a dictionary to pass to the template engine as its context.

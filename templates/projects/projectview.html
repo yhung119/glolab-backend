@@ -1,0 +1,15 @@
+ {% extends 'base.html' %}
+ {% block content %}
+
+ 	{% if categories %}
+ 	<ul>
+ 	{% for category in categories %}
+ 	<li>
+ 		{{ category.name}}
+ 	</li>
+ 	{% endfor %}
+    </ul>
+    {% else %}
+    <strong>There is no category.</strong>
+ 	{% endif %}
+{%endblock%}
