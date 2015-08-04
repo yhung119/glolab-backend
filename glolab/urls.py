@@ -31,7 +31,7 @@ urlpatterns = patterns('',
     url(r'^company/register/$',views.companyregister,name='companyregister'),
     url(r'^company/edit/$',views.editcompanyprofile,name='companyedit'),
     url(r'^profile/$',views.profile,name='profile'),
-    url(r'^projects/$', include('projects.urls')),
+    url(r'^projects/', include('projects.urls')),
     (r'^accounts/',include('registration.backends.simple.urls')),
     
 )

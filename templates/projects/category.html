@@ -1,0 +1,24 @@
+ {% extends 'base.html' %}
+ {% block content %}
+
+{% block body_block %}
+    <h1>{{ category_name }}</h1>
+    {% if category %}
+        {% if pages %}
+        <ul>
+                {% for page in pages %}
+                        <li><a href="{{ page.url }}">{{ page.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <strong>No pages currently in category.</strong>
+                    {% endif %}
+                {% if user.is_authenticated %}
+                    <a href="/projects/{{category.slug}}/add_project/">Add a Project</a>
+                    {% endif %}
+                {% else %}
+                    The specified categroy {{ category_name }} does not exist!
+        {% endif %}
+{% endblock %}
+
+{% endblock %}
