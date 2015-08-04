@@ -23,7 +23,7 @@ def register(request):
 			
 			user = user_form.save(commit=False)
 			
-			user.set_password(user.password)
+			
 			user.save()
 			g=Group.objects.get(name="student")
 			g.user_set.add(user)
