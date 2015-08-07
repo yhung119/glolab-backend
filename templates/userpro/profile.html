@@ -2,7 +2,12 @@
 {%block content%}
 <div class="container">
             <div class="row">
+           <div class="col-lg-12 text-center">
 {%if user.userprofile %}
+<br>
+<li class="page-scroll">
+      <a href="/student/edit/">Edit Profile</a>
+</li>
 <br>
 Firs Name:{{user.first_name}}
 <br>
@@ -12,12 +17,17 @@ About Me:{{user.userprofile.about_me}}
 
 {%elif user.companyprofile %}
 <br>
+<li class="page-scroll">
+    <a href="/company/edit/">Edit Company Profile</a>
+</li>
+<br>
 Company Name:{{user.companyprofile.company_name}}
 <br>
 Description :{{user.companyprofile.description}}
 <br>
 Website:  <a href="{{user.companyprofile.website}} ">{{user.companyprofile.website}} </a>
 {%endif%}
+</div>
 </div>
 </div>
 {%endblock%}
