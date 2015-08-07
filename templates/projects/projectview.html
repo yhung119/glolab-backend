@@ -1,16 +1,32 @@
  {% extends 'base.html' %}
  {% block content %}
+<<<<<<< HEAD
+ 
+    </br>
+    <br>
+    <br>
+    <br>
+
+=======
 <br>
 <h1>Categories</h1>
+>>>>>>> origin/master
  	{% if categories %}
  	<ul>
  	{% for category in categories %}
  	<li>
+<<<<<<< HEAD
  		{{ category.slug}}
+=======
+
+ 		<a href="/projects/{{category.slug}}/">
+ 		{{ category.name}}</a>
+>>>>>>> origin/master
  	</li>
  	{% endfor %}
     </ul>
     {% else %}
-    <strong>There is no category.</strong>
+    <strong>There is no category.</strong></br>
  	{% endif %}
+    <a href="/projects/add_category/">Add Category</a>
 {%endblock%}

@@ -1,14 +1,22 @@
  {% extends 'base.html' %}
  {% block content %}
-    
+ 
+    </br>
+    <br>
+    <br>
+    <br>
+    </br>
+    <br>
         <form id="category_form" method="post" action="/projects/{{category.slug}}/add_project/">
 
             {% csrf_token %}
             {% for hidden in form.hidden_fields %}
+            <br>
                 {{ hidden }}
             {% endfor %}
 
             {% for field in form.visible_fields %}
+            <br>
                 {{ field.errors }}
                 {{ field.help_text }}
                 {{ field }}
