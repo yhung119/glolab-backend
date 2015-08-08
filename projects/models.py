@@ -20,10 +20,11 @@ class Project(models.Model):
 	views = models.IntegerField(default = 0)
 	#picture = models.ImageField(upload_to='project_image',blank = True)
 	slug = models.SlugField(unique=True)
-	
+	companyprofile = models.ForeignKey(CompanyProfile,default=1)	
 
 
 	def save(self, *args, **kwargs):
+		
 		self.slug = slugify(self.name)
 		super(Project, self).save(*args, **kwargs)
 

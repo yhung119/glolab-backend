@@ -1,5 +1,7 @@
 from django import forms
 from projects.models import Category, Project
+from userpro.models import CompanyProfile
+from django.forms.fields import DateField, ChoiceField, MultipleChoiceField
 
 class CategoryForm(forms.ModelForm):
 	name = forms.CharField(max_length=128, help_text="Enter the Category")
@@ -14,9 +16,9 @@ class ProjectForm(forms.ModelForm):
 	description = forms.CharField(max_length=100000, help_text="description of your project")
 	views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
 	slug = forms.CharField(widget=forms.HiddenInput(), required=False)
-
+	
 	class Meta:
 		model = Project
 
-		exclude=('category', 'slug',)
+		exclude=('category', 'slug','companyprofile')
 

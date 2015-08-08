@@ -28,5 +28,7 @@
     {% else %}
     <strong>There is no category.</strong></br>
  	{% endif %}
+ 	{%if user.companyprofile%}
     <a href="/projects/add_category/">Add Category</a>
+    {%endif%}
 {%endblock%}

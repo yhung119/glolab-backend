@@ -7,8 +7,25 @@
     <br>
     <br>
     <br>
+    <div class="btn-group">
+  <button type="button" class="btn ">Default</button>
+  <button type="button" class="btn  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+   <ul class="dropdown-menu">
+   {% for category in categories %}
+    <li><a href="/projects/{{category.slug}}/">
+        {{ category.name}}</a></li>
+
+     {% endfor %}
+
+  </ul>
+</div>
+    
     <h1>{{ category_name }}</h1>
     {% if category %}
+    
         {% if pages %}
         <ul>
                 {% for page in pages %}
@@ -18,7 +35,7 @@
                 {% else %}
                     <strong>No project currently in category.</strong>
                     {% endif %}
-                {% if user.is_authenticated %}
+                {% if user.companyprofile %}
                     <a href="/projects/{{category.slug}}/add_project/">Add a Project</a>
                     {% endif %}
                 {% else %}
