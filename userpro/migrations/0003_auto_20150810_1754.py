@@ -7,13 +7,17 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('projects', '0002_project_companyprofile'),
+        ('userpro', '0002_companyprofile_picture'),
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='project',
+        migrations.RemoveField(
+            model_name='companyprofile',
             name='picture',
-            field=models.ImageField(upload_to=b'project_image', blank=True),
+        ),
+        migrations.AddField(
+            model_name='userprofile',
+            name='picture',
+            field=models.ImageField(default=b'', upload_to=b''),
         ),
     ]

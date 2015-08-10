@@ -12,7 +12,7 @@
 <p>by {{company_name}}
 
 <h1>{{project.description}}</h1>
-
+{% if project.picture %}
 <img src="{{ project.picture.url }}" alt="{{%\ project.picture} }"> </img>
-
+{% endif %}
 {%endblock%}

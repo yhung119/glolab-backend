@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User,null=True)
+	picture = models.ImageField(default='',)
 	about_me = models.TextField(max_length=450, default='', blank=True)
 	
 	def __unicode__(self):

@@ -7,6 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('userpro', '0003_auto_20150810_1754'),
     ]
 
     operations = [
@@ -25,8 +26,10 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=380)),
                 ('description', models.CharField(max_length=3000000)),
                 ('views', models.IntegerField(default=0)),
+                ('picture', models.ImageField(upload_to=b'project_image', blank=True)),
                 ('slug', models.SlugField(unique=True)),
                 ('category', models.ForeignKey(to='projects.Category')),
+                ('companyprofile', models.ForeignKey(default=1, to='userpro.CompanyProfile')),
             ],
         ),
     ]
