@@ -35,15 +35,15 @@ def add_project(request,category_name_slug):
 		cat = None
 
 	if request.method=='POST':
-		form = ProjectForm(request.POST)
+		form = ProjectForm(request.POST, request.FILES)
 		
-		if  form.is_valid:
-			if cat:
-
-				project = form.save(commit=False)
+		if  form.is_valid():
+			if cat:  
+				project = form.save(commit=False,)
 				project.companyprofile=CompanyProfile.objects.get(company_name=request.user.companyprofile.company_name)
 				project.category = cat
 				
+
 				project.save()
 
 				return category(request, category_name_slug)

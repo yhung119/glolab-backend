@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, url
 from projects import views
+from django.conf import settings
 
 urlpatterns = patterns('',
         url(r'^$', views.index, name='index'),
@@ -8,3 +9,4 @@ urlpatterns = patterns('',
     	url(r'^(?P<category_name_slug>[\w\-]+)/$', views.category, name='category'),
    		url(r'^(?P<category_name_slug>[\w\-]+)/(?P<project_name_slug>[\w\-]+)$', views.project, name='project'),
         )
+

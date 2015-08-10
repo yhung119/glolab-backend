@@ -17,6 +17,8 @@ from django.conf.urls import include, url,patterns
 from django.contrib import admin
 from django.views.generic import TemplateView
 from userpro import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = patterns('',
     # Examples:
@@ -34,4 +36,12 @@ urlpatterns = patterns('',
     url(r'^projects/', include('projects.urls')),
     (r'^accounts/',include('registration.backends.simple.urls')),
     
-)
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# UNDERNEATH your urlpatterns definition, add the following two lines:
+if settings.DEBUG:
+    urlpatterns += patterns(
+        'django.views.static',
+        (r'^media/(?P<path>.*)',
+        'serve',
+        {'document_root': settings.MEDIA_ROOT}), )
