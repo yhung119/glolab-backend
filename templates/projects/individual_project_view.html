@@ -12,7 +12,26 @@
 <p>by {{company_name}}
 
 <h1>{{project.description}}</h1>
+
 {% if project.picture %}
 <img src="{{ project.picture.url }}" alt="{{%\ project.picture} }"> </img>
 {% endif %}
+
+
+<form id="user_form" method = "post" action="/projects/{{ project.slug }}/apply/" enctype="multipart/form-data">
+{% csrf_token %}
+
+
+{{profile_form.errors}}
+
+<div class="row">
+	<div class="form-group col-xs-12">
+			<button type="submit" class="btn btn-default">Apply</button>
+		</div>
+</div>
+
+
+
+</form>
+
 {%endblock%}

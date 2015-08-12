@@ -14,15 +14,13 @@ def register(request):
 		return HttpResponseRedirect('/')
 	if request.method == 'POST':
 		user_form = UserForm(request.POST)
-		profile_form = UserProfileForm(request.POST)
+		profile_form = UserProfileForm(request.POST, request.FILES)
 
 		if user_form.is_valid() and profile_form.is_valid():
 
 			user = user_form.save()
 			
-			
 			user = user_form.save(commit=False)
-			
 			
 			user.save()
 			g=Group.objects.get(name="student")
@@ -51,7 +49,7 @@ def register(request):
 def editstudentprofile(request):
 	if request.method == 'POST':
 		form = editStudentProfile(request.POST, instance = request.user)
-		detail = UserProfileForm(data=request.POST, instance = request.user)
+		detail = UserProfileForm(request.POST, instance = request.user)
 		if form.is_valid() and detail.is_valid():
 			user = form.save()
 			user.save()
@@ -110,13 +108,12 @@ def editprofile(request):
 	except:
 		user_obj = None
 	if request.method == 'POST':
-		profile_form = UserProfileForm(data=request.POST, instance = request.user.userprofile)
+		profile_form = UserProfileForm(request.POST,request.FILES, instance = request.user.userprofile)
 		user = request.user
 		if profile_form.is_valid():
 
 			profile = profile_form.save(commit=False)
 			profile.user=request.user
-			
 			profile.save()
 			edit = True
 			return HttpResponseRedirect('/')
@@ -131,6 +128,7 @@ def editprofile(request):
 
 def is_company(user):
 	return user.groups.filter(name='company').exists()
+
 @user_passes_test(is_company,login_url='/')
 def editcompanyprofile(request):
 	try:

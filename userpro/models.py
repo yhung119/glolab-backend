@@ -4,7 +4,9 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User,null=True)
-	picture = models.ImageField(default='',)
+	picture = models.ImageField(upload_to='project_image',blank = True)
+	project_a = models.SlugField(unique = False, default='')
+	project_b = models.SlugField(unique = False, default = '')
 	about_me = models.TextField(max_length=450, default='', blank=True)
 	
 	def __unicode__(self):

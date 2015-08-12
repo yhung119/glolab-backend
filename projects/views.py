@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from projects.models import Category, Project
+from userpro.models import UserProfile
 from projects.form import CategoryForm, ProjectForm
 from userpro.models import CompanyProfile
+from django.contrib.auth.models import Group
+from userpro.forms import UserProfileForm,ApplyProjectForm
+from django.contrib.auth.decorators import permission_required, user_passes_test
 # Create your views here.
 
 def index(request):
@@ -11,6 +15,7 @@ def index(request):
 	return render(request,
 		'projects/projectview.html',
 		context_dict)
+
 
 def add_category(request):
 	if request.method=='POST':
@@ -130,5 +135,41 @@ def project(request, category_name_slug,project_name_slug):
 	return render(request, 'projects/individual_project_view.html', context_dict)
 
 
+def is_student(user):
+	return user.groups.filter(name='student').exists()
 
+@user_passes_test(is_student, login_url='/')
+def applied(request, project_name_slug):
+	try:
+		project = Project.objects.get(slug=project_name_slug)
+		
+	except Project.DoesNotExist:
+		pass
+
+	edit = False
+	try:
+		user_obj = User.Objects.get(user=request.user)
+	except:
+		user_obj = None
+
+	if request.method == 'POST':
+		profile_form = ApplyProjectForm(request.POST, instance = request.user.userprofile)
+		user = request.user
+		if profile_form.is_valid():
+
+			profile = profile_form.save(commit=False)
+			profile.user=request.user
+			profile.project_a = project_name_slug
+
+			profile.save()
+			edit = True
+			return HttpResponseRedirect('/')
+
+		else:
+			print profile_form.errors
+	else:
+		profile_form=ApplyProjectForm()
+
+
+	return render(request, 'projects/applied.html',{'project':project, 'profile_form':profile_form})
 

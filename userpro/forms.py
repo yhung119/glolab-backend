@@ -40,10 +40,22 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
 	about_me = forms.CharField(required=True)
 	picture = forms.ImageField(required=False)
+	project_a = forms.SlugField(required=False, widget = forms.HiddenInput())
+	project_b = forms.SlugField(required=False, widget = forms.HiddenInput())
 
 	class Meta:
 		model = UserProfile
-		fields=('about_me',)
+		fields=('about_me','picture')
+
+class ApplyProjectForm(forms.ModelForm):
+	about_me = forms.CharField(required=False)
+	picture = forms.ImageField(required=False)
+	project_a = forms.SlugField(required=False, widget = forms.HiddenInput())
+	project_b = forms.SlugField(required=False, widget = forms.HiddenInput())
+
+	class Meta:
+		model = UserProfile
+		fields=('about_me','picture')
 
 
 class editStudentProfile(forms.ModelForm):
@@ -74,10 +86,13 @@ class editStudentProfile(forms.ModelForm):
 
 class editStudentDetailProfile(forms.ModelForm):
 	about_me = forms.CharField(required=False)
+	picture = forms.ImageField(required=False)
+	project_a = forms.SlugField(required=False, widget = forms.HiddenInput())
+	project_b = forms.SlugField(required=False, widget = forms.HiddenInput())
 
 	class Meta:
 		model = UserProfile
-		fields = ('about_me',)
+		fields = ('about_me','picture')
 
 	def save(self, commit=True):
 		user = super(editStudentDetailProfile, self).save(commit=False)
