@@ -143,6 +143,42 @@ def project(request, category_name_slug,project_name_slug):
 def is_student(user):
 	return user.groups.filter(name='student').exists()
 
+
+def edit(request, category_name_slug,project_name_slug):
+	try:
+		cat = Category.objects.get(slug=category_name_slug)
+	except Category.DoesNotExist:
+		cat = None
+
+	try:
+		project = Project.objects.get(slug=project_name_slug)
+	except Project.DoesNotExist:
+		pass
+		
+	if request.method=='POST':
+		form = ProjectForm(request.POST, request.FILES,instance=project)
+		
+		if  form.is_valid():
+			if cat:  
+				project = form.save(commit=False,)
+				project.companyprofile=CompanyProfile.objects.get(company_name=request.user.companyprofile.company_name)
+				project.category = cat
+				
+				project.save()
+
+				return category(request, category_name_slug)
+			else:
+				print form.errors
+
+	else:
+		form = ProjectForm()
+
+	context_dict={'form':form, 'category':cat,'category_name': cat.name, 'slug':category_name_slug}
+	
+
+	return render(request, 'projects/edit.html',context_dict)
+
+
 @user_passes_test(is_student, login_url='/')
 def applied(request, project_name_slug):
 	try:

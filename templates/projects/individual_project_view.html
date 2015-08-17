@@ -36,7 +36,7 @@
 {% endif %}
 
 {% if user_company == company_name %}
-<form id="user_form" method = "post" action="/projects/{{ project.slug }}/edit/" enctype="multipart/form-data">
+<form id="user_form" method = "post" action="/projects/{{category.slug}}/{{ project.slug }}/edit/" enctype="multipart/form-data">
 {% csrf_token %}
 
 

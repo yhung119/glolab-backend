@@ -9,6 +9,6 @@ urlpatterns = patterns('',
     	url(r'^(?P<category_name_slug>[\w\-]+)/$', views.category, name='category'),
    		url(r'^(?P<category_name_slug>[\w\-]+)/(?P<project_name_slug>[\w\-]+)$', views.project, name='project'),
    		url(r'^(?P<project_name_slug>[\w\-]+)/apply/$',views.applied, name='apply'),
-   		url(r'^(?P<project_name_slug>[\w\-]+)/edit/$',views.edit, name='apply'),
+   		url(r'^(?P<category_name_slug>[\w\-]+)/(?P<project_name_slug>[\w\-]+)/edit/$',views.edit, name='edit'),
         )
 
