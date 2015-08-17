@@ -35,13 +35,15 @@
                 {% else %}
                     <strong>No project currently in category.</strong>
                     {% endif %}
-                {% if user.companyprofile %}
-              </br>
-                    <a href="/projects/{{category.slug}}/add_project/">Add a Project</a>
-                    {% endif %}
+
+                
                 {% else %}
                     The specified categroy {{ category_name }} does not exist!
         {% endif %}
+        {% if user %}
+              </br>
+                    <a href="/projects/{{category.slug}}/add_project/">Add a Project</a>
+                    {% endif %}
 {% endblock %}
 
 {% endblock %}

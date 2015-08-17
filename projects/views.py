@@ -38,7 +38,7 @@ def add_project(request,category_name_slug):
 		cat = Category.objects.get(slug=category_name_slug)
 	except Category.DoesNotExist:
 		cat = None
-
+	user = request.user.groups.filter(name='company').exists()
 	if request.method=='POST':
 		form = ProjectForm(request.POST, request.FILES)
 		
@@ -48,7 +48,6 @@ def add_project(request,category_name_slug):
 				project.companyprofile=CompanyProfile.objects.get(company_name=request.user.companyprofile.company_name)
 				project.category = cat
 				
-
 				project.save()
 
 				return category(request, category_name_slug)
@@ -58,7 +57,7 @@ def add_project(request,category_name_slug):
 	else:
 		form = ProjectForm()
 
-	context_dict={'form':form, 'category':cat,'category_name': cat.name, 'slug':category_name_slug}
+	context_dict={'form':form, 'category':cat,'category_name': cat.name, 'slug':category_name_slug, 'user':user}
 
 	return render(request, 'projects/add_project_view.html', context_dict)
 
@@ -86,6 +85,7 @@ def category(request, category_name_slug):
 		context_dict['category'] = category
 		context_dict['categories']=categories
 		context_dict['slug']=category_name_slug
+		context_dict['user']= request.user.groups.filter(name='company').exists()
 
 	except Category.DoesNotExist:
 		# We get here if we didn't find the specified category.
@@ -94,6 +94,7 @@ def category(request, category_name_slug):
 
 	# Go render the response and return it to the client.
 	return render(request, 'projects/category.html', context_dict)
+
 
 def project(request, category_name_slug,project_name_slug):
 
@@ -111,10 +112,14 @@ def project(request, category_name_slug,project_name_slug):
 		# We'll use this in the template to verify that the category exists.
 		context_dict['project'] = project
 		context_dict['slug']=project_name_slug
-		context_dict['company_name']=project.companyprofile.company_name
+		context_dict['company_name']=project.companyprofile
 		category = Category.objects.get(slug=category_name_slug)
 		context_dict['category_name'] = category.name
-
+		context_dict['is_student'] = request.user.groups.filter(name='student').exists()
+		if request.user.companyprofile:
+			context_dict['user_company'] = request.user.companyprofile
+		else:
+			context_dict['user_company'] = ''
 		# Retrieve all of the associated pages.
 		# Note that filter returns >= 1 model instance.
 		pages = Project.objects.filter(category=category)

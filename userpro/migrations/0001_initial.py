@@ -21,19 +21,16 @@ class Migration(migrations.Migration):
                 ('website', models.URLField(blank=True)),
                 ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
-            options={
-            },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='UserProfile',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('picture', models.ImageField(upload_to=b'project_image', blank=True)),
+                ('project_a', models.SlugField(default=b'')),
+                ('project_b', models.SlugField(default=b'')),
                 ('about_me', models.TextField(default=b'', max_length=450, blank=True)),
                 ('user', models.OneToOneField(null=True, to=settings.AUTH_USER_MODEL)),
             ],
-            options={
-            },
-            bases=(models.Model,),
         ),
     ]

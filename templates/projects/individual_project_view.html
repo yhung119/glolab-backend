@@ -17,12 +17,14 @@
 <img src="{{ project.picture.url }}" alt="{{%\ project.picture} }"> </img>
 {% endif %}
 
-
+{% if is_student %}
 <form id="user_form" method = "post" action="/projects/{{ project.slug }}/apply/" enctype="multipart/form-data">
 {% csrf_token %}
 
 
 {{profile_form.errors}}
+
+
 
 <div class="row">
 	<div class="form-group col-xs-12">
@@ -30,8 +32,27 @@
 		</div>
 </div>
 
+</form>
+{% endif %}
 
+{% if user_company == company_name %}
+<form id="user_form" method = "post" action="/projects/{{ project.slug }}/edit/" enctype="multipart/form-data">
+{% csrf_token %}
+
+
+{{profile_form.errors}}
+
+
+
+<div class="row">
+	<div class="form-group col-xs-12">
+			<button type="submit" class="btn btn-default">Edit</button>
+		</div>
+</div>
 
 </form>
+{% endif %}
+
+
 
 {%endblock%}
