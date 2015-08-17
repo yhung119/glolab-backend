@@ -116,7 +116,7 @@ def project(request, category_name_slug,project_name_slug):
 		category = Category.objects.get(slug=category_name_slug)
 		context_dict['category_name'] = category.name
 		context_dict['is_student'] = request.user.groups.filter(name='student').exists()
-		if request.user.companyprofile:
+		if request.user.groups.filter(name='company').exists():
 			context_dict['user_company'] = request.user.companyprofile
 		else:
 			context_dict['user_company'] = ''
