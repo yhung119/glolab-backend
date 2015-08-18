@@ -28,7 +28,9 @@
     {% else %}
     <strong>There is no category.</strong></br>
  	{% endif %}
- 	{%if user.companyprofile%}
-    <a href="/projects/add_category/">Add Category</a>
+ 	{%if user.companyprofile %}
+
+
+    <button type="submit" class="btn btn-default" action="/projects/add_category/"><a href="/projects/add_category/" style="color:white">Add Category</a></button>
     {%endif%}
 {%endblock%}
