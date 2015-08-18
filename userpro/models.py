@@ -1,12 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
+from projects.models import Project
 # Create your models here.
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User,null=True)
 	picture = models.ImageField(upload_to='project_image',blank = True)
-	project_a = models.CharField(max_length=128, unique = False, default='')
-	project_b = models.CharField(max_length=128, unique = False, default = '')
+	project_a = models.ForeignKey(Project,default='')
 	about_me = models.TextField(max_length=450, default='', blank=True)
 	
 	def __unicode__(self):

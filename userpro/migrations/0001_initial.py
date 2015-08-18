@@ -8,6 +8,7 @@ from django.conf import settings
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('projects', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
@@ -27,9 +28,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('picture', models.ImageField(upload_to=b'project_image', blank=True)),
-                ('project_a', models.SlugField(default=b'')),
-                ('project_b', models.SlugField(default=b'')),
                 ('about_me', models.TextField(default=b'', max_length=450, blank=True)),
+                ('project_a', models.ForeignKey(default=b'', to='projects.Project')),
                 ('user', models.OneToOneField(null=True, to=settings.AUTH_USER_MODEL)),
             ],
         ),

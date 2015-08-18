@@ -45,7 +45,7 @@ def add_project(request,category_name_slug):
 		if  form.is_valid():
 			if cat:  
 				project = form.save(commit=False,)
-				project.companyprofile=CompanyProfile.objects.get(company_name=request.user.companyprofile.company_name)
+				project.companyprofile=request.user.companyprofile.company_name
 				project.category = cat
 				
 				project.save()
@@ -194,13 +194,13 @@ def applied(request, project_name_slug):
 		user_obj = None
 
 	if request.method == 'POST':
-		profile_form = ApplyProjectForm(request.POST, instance = request.user.userprofile)
+		profile_form = ApplyProjectForm(request.POST, instance=request.user.userprofile)
 		user = request.user
 		if profile_form.is_valid():
 
 			profile = profile_form.save(commit=False)
 			profile.user=request.user
-			profile.project_a = project_name_slug
+			profile.project_a = project
 
 			profile.save()
 			edit = True
