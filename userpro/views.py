@@ -4,6 +4,7 @@ from userpro.models import UserProfile, CompanyProfile
 from userpro.forms import UserProfileForm, UserForm,CompanyProfileForm,editStudentProfile,editStudentDetailProfile
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import Group
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import permission_required, user_passes_test
 # Create your views here.
 
@@ -190,8 +191,15 @@ def index(request):
 def profile(request):
 	return render(request,'userpro/profile.html',{})
 
-
-	
+def allstudents(request):
+	users = User.objects.order_by('username')
+	students = []
+	for user in users:
+		if user.groups.filter(name='student').exists():	
+			students.append(user)
+	num = len(students)
+	column = num%3
+	return render(request, 'userpro/all_student_view.html', {'students':students, 'num':num,'column':column})
 
 
 

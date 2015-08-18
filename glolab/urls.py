@@ -27,6 +27,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.index, name='index'),
+    url(r'^student/$',views.allstudents, name='register'),
     url(r'^student/register/$',views.register, name='register'),
     url(r'^student/editprofile/$', views.editstudentprofile, name='editstudentprofile'),
     url(r'^student/edit/$',views.editprofile,name='edit'),
