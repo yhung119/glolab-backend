@@ -189,7 +189,8 @@ def index(request):
 
 @login_required
 def profile(request):
-	return render(request,'userpro/profile.html',{})
+	user=request.user
+	return render(request,'userpro/profile.html',{'user':user})
 
 def allstudents(request):
 	users = User.objects.order_by('username')

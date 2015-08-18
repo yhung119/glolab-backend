@@ -39,7 +39,7 @@ class UserForm(forms.ModelForm):
 
 class UserProfileForm(forms.ModelForm):
 	about_me = forms.CharField(required=True)
-	picture = forms.ImageField(required=False)
+	picture = forms.ImageField(required=False, help_text='profile picture')
 	project_a = forms.SlugField(required=False, widget = forms.HiddenInput())
 	project_b = forms.SlugField(required=False, widget = forms.HiddenInput())
 
@@ -86,7 +86,7 @@ class editStudentProfile(forms.ModelForm):
 
 class editStudentDetailProfile(forms.ModelForm):
 	about_me = forms.CharField(required=False)
-	picture = forms.ImageField(required=False)
+	picture = forms.ImageField(required=False,help_text='profile picture')
 	project_a = forms.SlugField(required=False, widget = forms.HiddenInput())
 	project_b = forms.SlugField(required=False, widget = forms.HiddenInput())
 
