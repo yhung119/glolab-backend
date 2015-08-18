@@ -15,6 +15,7 @@ class UserProfile(models.Model):
 class CompanyProfile(models.Model):
 	user = models.OneToOneField(User)
 	company_name=models.CharField(max_length=128)
+	project_a = models.ForeignKey(Project,default='')
 	description = models.TextField(max_length=100, default='', blank=True)
 	website= models.URLField(blank=True)
 

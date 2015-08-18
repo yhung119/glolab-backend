@@ -8,8 +8,8 @@ from django.conf import settings
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('projects', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('projects', '__first__'),
     ]
 
     operations = [
@@ -20,6 +20,7 @@ class Migration(migrations.Migration):
                 ('company_name', models.CharField(max_length=128)),
                 ('description', models.TextField(default=b'', max_length=100, blank=True)),
                 ('website', models.URLField(blank=True)),
+                ('project_a', models.ForeignKey(default=b'', to='projects.Project')),
                 ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
         ),

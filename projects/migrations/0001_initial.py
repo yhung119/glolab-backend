@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                 ('views', models.IntegerField(default=0)),
                 ('picture', models.ImageField(upload_to=b'project_image', blank=True)),
                 ('slug', models.SlugField(unique=True)),
-                ('companyprofile', models.CharField(max_length=400)),
+                ('company', models.CharField(max_length=400)),
                 ('category', models.ForeignKey(to='projects.Category')),
             ],
         ),

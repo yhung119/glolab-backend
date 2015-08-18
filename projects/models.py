@@ -19,7 +19,7 @@ class Project(models.Model):
 	views = models.IntegerField(default = 0)
 	picture = models.ImageField(upload_to='project_image',blank = True)
 	slug = models.SlugField(unique=True)
-	companyprofile = models.CharField(max_length=400)	
+	company = models.CharField(max_length=400)	
 
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.name)

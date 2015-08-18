@@ -56,8 +56,12 @@
 
 <div class="container">
 </br>
-	<h1>Applied Students:</h1>
 
+{% if students_with_project %}
+	<h1>Applied Students:</h1>
+{% else %}
+  <h1>Be the first one to apply?</h1>
+{% endif %}
 {% for student in students_with_project %}
 
    <div class="col-sm-6 col-md-3">

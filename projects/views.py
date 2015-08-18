@@ -45,11 +45,11 @@ def add_project(request,category_name_slug):
 		if  form.is_valid():
 			if cat:  
 				project = form.save(commit=False,)
-				project.companyprofile=request.user.companyprofile.company_name
+				project.company=request.user.companyprofile.company_name
 				project.category = cat
-				
 				project.save()
 
+				request.user.companyprofile.project=project
 				return category(request, category_name_slug)
 			else:
 				print form.errors
@@ -112,7 +112,7 @@ def project(request, category_name_slug,project_name_slug):
 		# We'll use this in the template to verify that the category exists.
 		context_dict['project'] = project
 		context_dict['slug']=project_name_slug
-		context_dict['company_name']=project.companyprofile
+		context_dict['company_name']=project.company
 		category = Category.objects.get(slug=category_name_slug)
 		context_dict['category_name'] = category.name
 		context_dict['is_student'] = request.user.groups.filter(name='student').exists()
