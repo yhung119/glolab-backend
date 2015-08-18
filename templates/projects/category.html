@@ -27,22 +27,24 @@
     {% if category %}
     
         {% if pages %}
-<div class="row">
+<div class="container">
 
 {% for page in pages  %}
 
 
    <div class="col-sm-6 col-md-3">
       <div class="thumbnail">
+        <a href="/projects/{{category.slug}}/{{ page.slug }}">
         {% if page.picture %}
          <img src="{{page.picture}}" alt="project picture">
          {% else %}
-         <img src="" alt="project picture">
+         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/HEB_project_flow_icon_02_charts_and_calendar.svg/1024px-HEB_project_flow_icon_02_charts_and_calendar.svg.png" alt="project picture">
          {% endif %}
+       </a>
       </div>
       <div class="caption">
          <h3><a href="/projects/{{category.slug}}/{{ page.slug }}">{{ page.name }}</a></h3>
-         <p><a href="/projects/{{category.slug}}/{{ page.slug }}">{{ page.description }}</a></p>
+         <p>{{ page.description }}</p>
       </div>
    </div>
 
@@ -50,11 +52,7 @@
 {% endfor %}
 
 </div>
-
-
-
-
-
+<div class="container">
                 {% else %}
                     <strong>No project currently in category.</strong>
                     {% endif %}
@@ -67,6 +65,9 @@
               </br>
                     <a href="/projects/{{category.slug}}/add_project/">Add a Project</a>
                     {% endif %}
+
+
+</div>
 {% endblock %}
 
 

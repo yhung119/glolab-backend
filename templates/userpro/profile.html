@@ -7,7 +7,6 @@
 {%if user.userprofile %}
 <br>
 <li class="page-scroll">
-      <a href="/student/edit/">Edit Profile</a>
 </li>
 <br>
 Firs Name:{{user.first_name}}
@@ -15,28 +14,26 @@ Firs Name:{{user.first_name}}
 Last Name: {{user.last_name}}
 <br>
 About Me:{{user.userprofile.about_me}}
-
+<br>
+      <a href="/student/edit/">Edit Profile</a>
 {%elif user.companyprofile %}
 <br>
-<li class="page-scroll">
-    <a href="/company/edit/">Edit Company Profile</a>
-</li>
 <br>
 Company Name: {{user.companyprofile.company_name}}
 <br>
 Description: {{user.companyprofile.description}}
 <br>
 Website: <a href="{{user.companyprofile.website}} ">{{user.companyprofile.website}} </a>
+<br>
+ <a href="/company/edit/" class="btn btn-lg btn-primary">Edit Company Profile</a>
 {%endif%}
-</div>
-</div>
-</div>
-
-      <div class="col-md-6">
-                    <a href="/accounts/password/change/" class="btn btn-lg btn-primary btn-block">
+<a href="/accounts/password/change/" class="btn btn-lg btn-primary">
                         Change Password
                     </a>
-        </div>
+   
+</div>
+</div>
+</div>
 </section>
 
 
