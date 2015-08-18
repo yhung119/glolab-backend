@@ -8,27 +8,20 @@
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
             <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
         </ol>
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
             <div class="item active">
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
+                <div class="fill" style="background-image:url('http://www.educationeye.org/wp-content/uploads/2014/06/8231691-beautiful-college-studentL-HI.jpg');"></div>
                 <div class="carousel-caption">
-                    <h2 style="font-size:30px;">Caption 1</h2>
+                    <h2 style="font-size:30px;">Student</h2>
                 </div>
             </div>
             <div class="item">
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
+                <div class="fill" style="background-image:url('http://cdn-3.yourviva.com/assets/images/business/business.jpg');"></div>
                 <div class="carousel-caption">
-                    <h2 style="font-size:30px;">Caption 2</h2>
-                </div>
-            </div>
-            <div class="item">
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
-                <div class="carousel-caption">
-                    <h2 style="font-size:30px;">Caption 3</h2>
+                    <h2 style="font-size:30px;">Company</h2>
                 </div>
             </div>
         </div>
@@ -53,10 +46,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                 
-                    <h2>About {%if user.is_authenticated %}
-                        {{user.username}}
-                        {{user.userprofile.about_me}}
-                        {%endif%}</h2>
+                    <h2>About </h2>
               
 
                     <hr class="star-light">
@@ -66,14 +56,14 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-lg-offset-2">
-                    <p>Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
+                    <p>WorkWithUs provides a collaboration between companies and students, a connection to give student practical experiences with working commercial companies. Provides companies an easier way to get projects completed and gain fresh ideas.</p>
                 </div>
                 <div class="col-lg-4">
-                    <p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
+                    <p>Whether you're a student looking to showcase your work, or companies with incompleted projects, this is a perfect place for you!</p>
                 </div>
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <a href="#" class="btn btn-lg btn-outline">
-                        <i class="fa fa-download"></i> Download Theme
+                        <i class="fa fa-download"></i>Connect Now!
                     </a>
                 </div>
             </div>
@@ -96,7 +86,7 @@
             </div>
            
                  <div class="text-center">
-                    <p>Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
+                    <p>Students are given the experience to work with commercial companies and being able to demonstrate their works.</p>
                 </div>
             
 
@@ -113,7 +103,7 @@
 
     {% if user.is_authenticated %}
     <section>
-      <div class="col-lg-8 col-lg-offset-2 text-center">
+      <div class="col-md-6">
                     <a href="/accounts/password/change/" class="btn btn-lg btn-primary btn-block">
                         Change Password
                     </a>
