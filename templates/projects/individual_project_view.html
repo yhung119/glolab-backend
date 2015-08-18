@@ -54,5 +54,28 @@
 {% endif %}
 </div>
 
+<div class="container">
+</br>
+	<h1>Applied Students:</h1>
+
+{% for student in students_with_project %}
+
+   <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+      	{% if student.userprofile.picture %}
+         <img src="{{student.userprofile.picture}}" alt="profile picture">
+         {% else %}
+         <img src="http://freelanceme.net/Images/default%20profile%20picture.png" alt="profile picture">
+         {% endif %}
+      </div>
+      <div class="caption">
+         <h3>{{student.user.username}}</h3>
+         <p>{{ student.about_me}}</p>
+      </div>
+   </div>
+
+{% endfor %}
+</div>
+
 
 {%endblock%}

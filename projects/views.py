@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from projects.models import Category, Project
 from userpro.models import UserProfile
 from projects.form import CategoryForm, ProjectForm
-from userpro.models import CompanyProfile
+from userpro.models import CompanyProfile,UserProfile
 from django.contrib.auth.models import Group
 from userpro.forms import UserProfileForm,ApplyProjectForm
 from django.contrib.auth.decorators import permission_required, user_passes_test
@@ -123,6 +123,15 @@ def project(request, category_name_slug,project_name_slug):
 		# Retrieve all of the associated pages.
 		# Note that filter returns >= 1 model instance.
 		pages = Project.objects.filter(category=category)
+
+		students = UserProfile.objects.all()
+		students_project = []
+
+		for student in students:
+			if student.project_a==project:
+				students_project.append(student)
+
+		context_dict['students_with_project'] = students_project
 
 		# Adds our results list to the template context under name pages.
 		context_dict['pages'] = pages
