@@ -36,7 +36,7 @@
       <div class="thumbnail">
         <a href="/projects/{{category.slug}}/{{ page.slug }}">
         {% if page.picture %}
-         <img src="{{page.picture}}" alt="project picture">
+         <img src={{ page.picture.url }} alt="project picture">
          {% else %}
          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/HEB_project_flow_icon_02_charts_and_calendar.svg/1024px-HEB_project_flow_icon_02_charts_and_calendar.svg.png" alt="project picture">
          {% endif %}
